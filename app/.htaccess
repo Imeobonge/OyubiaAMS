@@ -1,0 +1,3 @@
+# Never serve PHP source / config from the app folder directly.
+Order deny,allow
+Deny from all

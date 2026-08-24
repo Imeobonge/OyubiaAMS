@@ -1,0 +1,14 @@
+# Local/secret config — never commit DB credentials
+app/config.php
+
+# OS / editor noise
+Thumbs.db
+.DS_Store
+*.log
+
+# Dependency folders (if you later add any)
+vendor/
+node_modules/
+
+# Uploaded form files (stored outside the web root at runtime)
+form_uploads/

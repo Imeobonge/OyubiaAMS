@@ -1,0 +1,22 @@
+# OyubiaCYF front-controller routing
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # If installed in a subfolder, set the base accordingly (e.g. /oyubiacyf/).
+    # RewriteBase /
+
+    # Serve existing files/folders directly (assets, manifest, service worker).
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Everything else goes to the front controller.
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Service workers must be served fresh so updates roll out.
+<FilesMatch "service-worker\.js$">
+    <IfModule mod_headers.c>
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+    </IfModule>
+</FilesMatch>

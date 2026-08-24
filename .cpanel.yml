@@ -1,0 +1,18 @@
+---
+# Isolated cPanel deployment for OyubiaCYF.
+# IMPORTANT: point each domain document root at its public/ directory.
+# Update the two folder names below if your actual domains are different.
+deployment:
+  tasks:
+    # Production: document root -> ~/oyubiacyf.com/public
+    - export PROD=$HOME/oyubiacyf.com
+    - /bin/mkdir -p "$PROD/public" "$PROD/app" "$PROD/database"
+    - /bin/cp -R public/. "$PROD/public/"
+    - /bin/cp -R app/. "$PROD/app/"
+    - /bin/cp -R database/. "$PROD/database/"
+    # Demo: document root -> ~/demo.oyubiacyf.com/public
+    - export DEMO=$HOME/demo.oyubiacyf.com
+    - /bin/mkdir -p "$DEMO/public" "$DEMO/app" "$DEMO/database"
+    - /bin/cp -R public/. "$DEMO/public/"
+    - /bin/cp -R app/. "$DEMO/app/"
+    - /bin/cp -R database/. "$DEMO/database/"
