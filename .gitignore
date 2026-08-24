@@ -1,5 +1,6 @@
 # Local/secret config — never commit DB credentials
 app/config.php
+app/config.demo.php
 
 # OS / editor noise
 Thumbs.db
