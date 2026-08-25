@@ -16,7 +16,7 @@
     </div>
 
     <div class="card form-card">
-        <h1>Welcome — register yourself</h1>
+        <h1>Welcome to Oyubia Christian Youth Forum</h1>
         <p class="form-desc">How are you attending? Tap the option that fits you.</p>
 
         <div class="cat-picker" style="grid-template-columns:1fr">
