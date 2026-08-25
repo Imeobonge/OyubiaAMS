@@ -1,15 +1,7 @@
 <?php /** @var array $stats */ /** @var array $byCongregation */ /** @var ?array $ed */ ?>
 <div class="page-head">
     <h1>Dashboard</h1>
-    <div class="inline-actions">
-        <?php if (is_admin() && !empty(config()['demo_mode'])): ?>
-            <form method="post" action="<?= url('/admin/demo-seed') ?>">
-                <?= csrf_field() ?>
-                <button class="btn secondary" type="submit">Load demo data</button>
-            </form>
-        <?php endif; ?>
-        <a class="btn" href="<?= url('/register') ?>">+ Register attendee</a>
-    </div>
+    <a class="btn" href="<?= url('/register') ?>">+ Register attendee</a>
 </div>
 
 <?php if (!$ed): ?>

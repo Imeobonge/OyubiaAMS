@@ -10,29 +10,15 @@
  *
  *   php database/seed_demo.php
  *
- * It may also be included by the authenticated demo-only admin action. In that
- * mode it refuses to run unless the demo data tables are empty.
- *
  * Safe to delete after use. Will not run via the web.
  */
-if (PHP_SAPI !== 'cli' && !defined('OYAMS_AUTHENTICATED_DEMO_SEED')) {
-    exit("This seeder is not directly accessible.\n");
-}
+if (PHP_SAPI !== 'cli') { exit("This seeder runs from the command line only.\n"); }
 
 require_once __DIR__ . '/../app/db.php';
 require_once __DIR__ . '/../app/helpers.php';
 require_once __DIR__ . '/../app/services/registration.php';
 
 $pdo = db();
-
-$webSeed = PHP_SAPI !== 'cli';
-if ($webSeed) {
-    foreach (['registrations', 'attendees', 'congregations'] as $table) {
-        if ((int)$pdo->query("SELECT COUNT(*) FROM $table")->fetchColumn() > 0) {
-            throw new RuntimeException('Demo data was not loaded because the demo database already contains attendance data.');
-        }
-    }
-}
 
 // --- Make sure the 2026 edition is the active one ---
 $ed = $pdo->query("SELECT * FROM editions WHERE year = 2026")->fetch();
@@ -45,19 +31,17 @@ $pdo->prepare("UPDATE editions SET is_active = 1 WHERE id = ?")->execute([$ed['i
 
 $staffId = (int)$pdo->query("SELECT id FROM users WHERE role='admin' ORDER BY id LIMIT 1")->fetchColumn();
 
-if (!$webSeed) {
-    // CLI maintenance mode stays idempotent for developers who deliberately rerun it.
-    $pdo->exec("DELETE vd FROM visitor_details vd JOIN registrations r ON r.id=vd.registration_id WHERE r.edition_id={$ed['id']}");
-    $pdo->exec("DELETE FROM registrations WHERE edition_id={$ed['id']}");
-    $pdo->exec("DELETE a FROM attendees a WHERE NOT EXISTS (SELECT 1 FROM registrations r WHERE r.attendee_id=a.id)");
-    $pdo->exec("DELETE FROM reg_counters WHERE edition_id={$ed['id']}");
-    $pdo->exec("DELETE FROM congregations WHERE NOT EXISTS (SELECT 1 FROM registrations r WHERE r.congregation_id=congregations.id)");
+// Wipe any previous seeder run for this edition so re-running stays idempotent.
+$pdo->exec("DELETE vd FROM visitor_details vd JOIN registrations r ON r.id=vd.registration_id WHERE r.edition_id={$ed['id']}");
+$pdo->exec("DELETE FROM registrations WHERE edition_id={$ed['id']}");
+$pdo->exec("DELETE a FROM attendees a WHERE NOT EXISTS (SELECT 1 FROM registrations r WHERE r.attendee_id=a.id)");
+$pdo->exec("DELETE FROM reg_counters WHERE edition_id={$ed['id']}");
+$pdo->exec("DELETE FROM congregations WHERE NOT EXISTS (SELECT 1 FROM registrations r WHERE r.congregation_id=congregations.id)");
 
-    // Normalize any congregation names from previous seeder runs.
-    $pdo->exec("UPDATE congregations SET name='Church of Christ, Aka Road, Uyo'   WHERE name IN ('Uyo Church of Christ','COC Uyo')");
-    $pdo->exec("UPDATE congregations SET name='Church of Christ, Ndoki Road, Aba'  WHERE name IN ('Aba Church of Christ','COC Aba')");
-    $pdo->exec("UPDATE congregations SET name='Church of Christ, Rumuomasi'         WHERE name='COC Port Harcourt'");
-}
+// Normalize any congregation names from previous seeder runs.
+$pdo->exec("UPDATE congregations SET name='Church of Christ, Aka Road, Uyo'   WHERE name IN ('Uyo Church of Christ','COC Uyo')");
+$pdo->exec("UPDATE congregations SET name='Church of Christ, Ndoki Road, Aba'  WHERE name IN ('Aba Church of Christ','COC Aba')");
+$pdo->exec("UPDATE congregations SET name='Church of Christ, Rumuomasi'         WHERE name='COC Port Harcourt'");
 
 function ensure_cong(PDO $pdo, array $c): int
 {
