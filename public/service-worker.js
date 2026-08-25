@@ -1,5 +1,5 @@
 /* OyubiaCYF service worker — app-shell caching + offline navigation fallback. */
-var CACHE = 'oyubiacyf-v12';
+var CACHE = 'oyubiacyf-v13';
 
 // Paths are relative to the SW scope, so they work at root or in a subfolder.
 var SHELL = [

@@ -532,3 +532,171 @@ tr:hover td { background: #fff9db; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ================= OYAMS — blue attendance workspace ================= */
+:root {
+  --primary: #315ec4;
+  --primary-dark: #173b86;
+  --accent: #75baf2;
+  --bg: #edf5fc;
+  --card: #ffffff;
+  --text: #121b32;
+  --muted: #6b7790;
+  --border: #dce6f2;
+  --radius: 18px;
+  --shadow: 0 12px 35px rgba(27, 61, 119, .08);
+}
+
+body, body.app-shell {
+  background: linear-gradient(135deg, #f8fbff 0%, #edf5fc 60%, #e2f0fc 100%);
+  color: var(--text);
+}
+a { color: var(--primary); font-weight: 600; }
+
+/* The Behance-inspired desktop rail keeps navigation visible and uncluttered. */
+.app-shell .topbar {
+  position: fixed; inset: 0 auto 0 0; z-index: 50;
+  width: 238px; height: 100vh; padding: 2rem 1.15rem 1.25rem;
+  display: flex; flex-direction: column; align-items: stretch; flex-wrap: nowrap; gap: 1.6rem;
+  background: linear-gradient(180deg, #dcecff 0%, #cbdff6 100%);
+  color: var(--text); border: 0; border-right: 1px solid rgba(49,94,196,.08);
+  box-shadow: 10px 0 35px rgba(35,75,145,.05);
+}
+.app-shell .brand { display: grid; gap: .7rem; padding: 0 .55rem; }
+.app-shell .brand a {
+  color: #173b86; font-size: 1.65rem; font-weight: 900; letter-spacing: -.055em;
+}
+.app-shell .brand a::before {
+  content: ""; display: inline-block; width: 28px; height: 28px; margin-right: .65rem;
+  vertical-align: -6px; border: 6px solid #173b86; border-radius: 9px;
+  box-shadow: 9px 9px 0 -5px #75baf2;
+}
+.app-shell .edition-pill {
+  width: fit-content; margin: 0; padding: .28rem .65rem;
+  color: #244b91; background: rgba(255,255,255,.62); font-weight: 700;
+}
+.app-shell .mainnav {
+  width: 100%; margin: 0; display: flex; flex-direction: column; align-items: stretch; gap: .35rem;
+  overflow-y: auto; scrollbar-width: thin;
+}
+.app-shell .mainnav a {
+  color: #56657f; padding: .72rem .85rem; border-radius: 10px;
+  font-size: .88rem; font-weight: 650; opacity: 1;
+}
+.app-shell .mainnav a:hover { color: #173b86; background: rgba(255,255,255,.65); }
+.app-shell .mainnav a.active {
+  color: #fff; background: linear-gradient(135deg, #315ec4, #21499e);
+  box-shadow: 0 8px 20px rgba(49,94,196,.25);
+}
+.app-shell .mainnav a.active::after { display: none; }
+.app-shell .userbox {
+  width: 100%; margin-top: auto; padding: .9rem .55rem 0; border: 0;
+  border-top: 1px solid rgba(23,59,134,.12); color: #334563; flex-wrap: wrap;
+}
+.app-shell .nav-signout { color: #173b86; border-color: rgba(23,59,134,.2); background: rgba(255,255,255,.48); }
+.app-shell .nav-signout:hover { color: #fff; background: #173b86; }
+.app-shell .container { max-width: 1280px; margin: 0 0 0 238px; padding: 2.1rem 2.2rem 4rem; }
+
+.page-head { margin-bottom: 1.35rem; }
+.page-head h1 { color: #10182b; font-size: clamp(1.65rem, 2.6vw, 2.25rem); font-weight: 800; }
+.card {
+  border: 1px solid rgba(38,78,145,.12); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 1.35rem; background: rgba(255,255,255,.96);
+}
+.stat { text-align: left; min-height: 125px; }
+.stat::before { inset: auto 1.25rem 1.1rem auto; width: 38px; height: 6px; border-radius: 999px; background: #b9d9f6; }
+.stat:nth-child(2n)::before { background: #315ec4; }
+.stat .num { color: #315ec4; font-size: 2.4rem; font-weight: 800; }
+.stat .lbl { color: #778198; font-weight: 650; text-transform: none; }
+
+.btn {
+  color: #fff; background: linear-gradient(135deg, #3f6fd2, #244eab);
+  border: 0; border-radius: 9px; box-shadow: 0 7px 16px rgba(49,94,196,.2); font-weight: 700;
+}
+.btn:hover { color: #fff; background: linear-gradient(135deg, #315ec4, #173b86); box-shadow: 0 9px 20px rgba(49,94,196,.26); }
+.btn.secondary { color: #315ec4; background: #eef4ff; border: 1px solid #bfcff1; box-shadow: none; }
+.btn.secondary:hover { color: #fff; background: #315ec4; }
+.btn.ghost { color: #53627d; background: #fff; border: 1px solid #d6e0ed; box-shadow: none; }
+input[type=text], input[type=email], input[type=tel], input[type=password],
+input[type=number], input[type=date], select, textarea {
+  border: 1px solid #cfdaea; border-radius: 10px; padding: .68rem .78rem; background: #fff;
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: #5480d9; box-shadow: 0 0 0 4px rgba(49,94,196,.12); }
+th { color: #66728a; background: #f2f7fc; }
+tr:hover td { background: #edf6ff; }
+.badge.group { background: #e7efff; color: #2853af; }
+.badge.solo { background: #e5f7ee; color: #17804c; }
+.badge.visitor { background: #fff1dd; color: #aa650e; }
+.cat-card { border-color: #dbe5f1; border-radius: 16px; }
+.cat-card h3 { color: #234da7; }
+.cat-card:hover { border-color: #6d95e2; background: #f4f8ff; box-shadow: var(--shadow); }
+.section-title, .section-label { color: #263b65; border-color: #b8cbea; }
+.attendee-row { background: #f8fbff; border-color: #d8e4f1; }
+.qr-poster { border: 1px solid #d3dfec; box-shadow: 0 14px 35px rgba(27,61,119,.12); }
+.qr-poster-title { color: #173b86; }
+
+/* Split sign-in screen, adapted from the reference without copying its artwork. */
+.login-page {
+  min-height: 100vh; padding: 0; display: grid; grid-template-columns: minmax(420px, 1.15fr) minmax(390px, .85fr);
+  background: #f7fbff;
+}
+.login-showcase {
+  position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(3rem, 7vw, 7rem); color: #fff;
+  background: linear-gradient(145deg, #b9dcfa 0%, #72b6ee 30%, #168bc8 68%, #15529c 100%);
+}
+.login-showcase::after {
+  content: ""; position: absolute; width: 520px; height: 520px; left: -160px; bottom: -260px;
+  border-radius: 42% 58% 55% 45%; background: rgba(8,53,131,.66); transform: rotate(18deg);
+}
+.showcase-mark { display: flex; margin-bottom: 2rem; }
+.showcase-mark span { width: 42px; height: 42px; border: 7px solid #173b86; border-radius: 12px; }
+.showcase-mark span + span { margin-left: -15px; margin-top: 15px; border-color: rgba(255,255,255,.85); }
+.showcase-kicker { margin: 0 0 .9rem; color: #173b86; text-transform: uppercase; letter-spacing: .12em; font-weight: 800; }
+.login-showcase h1 { position: relative; z-index: 2; margin: 0; max-width: 620px; color: #0e2d76; font-size: clamp(3rem, 6vw, 6rem); line-height: .96; letter-spacing: -.065em; }
+.showcase-copy { position: relative; z-index: 2; max-width: 500px; margin-top: 1.5rem; font-size: 1.05rem; color: #eaf6ff; }
+.showcase-orbit { position: absolute; border: 4px solid rgba(23,59,134,.42); border-radius: 18px; transform: rotate(8deg); }
+.orbit-one { width: 80px; height: 80px; right: 12%; top: 14%; }
+.orbit-two { width: 46px; height: 46px; right: 24%; bottom: 20%; }
+.login-card {
+  align-self: center; justify-self: center; width: min(430px, calc(100% - 3rem)); max-width: none;
+  padding: 2.5rem; border: 0; box-shadow: none; background: transparent;
+}
+.login-brand { text-align: left; }
+.login-logo {
+  width: 62px; height: 62px; margin: 0 0 1.15rem; color: #fff; background: #173b86;
+  border-radius: 17px; box-shadow: 10px 10px 0 -5px #75baf2;
+}
+.login-card h1 { color: #173b86; font-size: 2rem; }
+.login-foot { color: #7b879d !important; border-color: #dce5ef; }
+.demo-note { background: #eaf4ff; color: #31527e; border-color: #c9def2; }
+
+@media (max-width: 900px) {
+  .app-shell .topbar { width: 205px; }
+  .app-shell .container { margin-left: 205px; padding: 1.6rem; }
+  .login-page { grid-template-columns: .9fr 1.1fr; }
+  .login-showcase { padding: 3rem; }
+  .login-showcase h1 { font-size: clamp(2.7rem, 6vw, 4.6rem); }
+}
+@media (max-width: 720px) {
+  .app-shell .topbar {
+    position: sticky; inset: auto; width: 100%; height: auto; padding: .8rem 1rem;
+    flex-direction: row; flex-wrap: wrap; align-items: center; gap: .65rem;
+    background: #173b86; border: 0;
+  }
+  .app-shell .brand { display: flex; align-items: center; padding: 0; }
+  .app-shell .brand a, .app-shell .edition-pill { color: #fff; }
+  .app-shell .brand a::before { border-color: #fff; box-shadow: 8px 8px 0 -5px #75baf2; }
+  .app-shell .nav-toggle { display: inline-flex; border-color: rgba(255,255,255,.35); }
+  .app-shell .nav-toggle-bars, .app-shell .nav-toggle-bars::before, .app-shell .nav-toggle-bars::after { background: #fff; }
+  .app-shell .mainnav, .app-shell .userbox { display: none; flex-basis: 100%; }
+  .app-shell .topbar.open .mainnav, .app-shell .topbar.open .userbox { display: flex; }
+  .app-shell .mainnav a { color: #dbe8ff; }
+  .app-shell .mainnav a:hover { color: #fff; background: rgba(255,255,255,.1); }
+  .app-shell .userbox { color: #fff; border-top-color: rgba(255,255,255,.15); }
+  .app-shell .nav-signout { color: #fff; border-color: rgba(255,255,255,.25); background: transparent; }
+  .app-shell .container { margin: 0; padding: 1.25rem 1rem 3rem; }
+  .login-page { display: flex; padding: 1.2rem; background: linear-gradient(145deg, #d8ecff, #f8fbff); }
+  .login-showcase { display: none; }
+  .login-card { padding: 1.8rem 1.35rem; background: #fff; border-radius: 22px; box-shadow: var(--shadow); }
+}

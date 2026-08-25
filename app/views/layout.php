@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= e($title ?? 'OyubiaCYF') ?> · <?= e(config()['app_name']) ?></title>
     <link rel="manifest" href="<?= url('/manifest.webmanifest') ?>">
-    <meta name="theme-color" content="#f5c400">
+    <meta name="theme-color" content="#173b86">
     <link rel="stylesheet" href="<?= asset('/assets/css/styles.css') ?>">
 </head>
-<body>
+<body class="app-shell">
 <?php
 $u  = current_user();
 $ed = active_edition();
@@ -24,7 +24,7 @@ function nav_active(string $href, string $base, string $reqPath): string {
 ?>
 <header class="topbar">
     <div class="brand">
-        <a href="<?= url('/') ?>"><?= e(config()['app_name']) ?></a>
+        <a href="<?= url('/') ?>" aria-label="OYAMS dashboard">OYAMS</a>
         <?php if ($ed): ?><span class="edition-pill"><?= e($ed['name']) ?></span><?php endif; ?>
     </div>
     <?php if ($u): ?>

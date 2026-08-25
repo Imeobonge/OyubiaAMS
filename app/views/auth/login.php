@@ -4,14 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sign in · <?= e(config()['app_name']) ?></title>
-    <meta name="theme-color" content="#f5c400">
+    <meta name="theme-color" content="#173b86">
     <link rel="stylesheet" href="<?= asset('/assets/css/styles.css') ?>">
 </head>
 <body class="login-page">
+<section class="login-showcase" aria-hidden="true">
+    <div class="showcase-mark"><span></span><span></span></div>
+    <p class="showcase-kicker">Oyubia Christian Youth Forum</p>
+    <h1>Simple attendance.<br>Better events.</h1>
+    <p class="showcase-copy">Register attendees, manage congregations and see your event numbers in one calm workspace.</p>
+    <div class="showcase-orbit orbit-one"></div>
+    <div class="showcase-orbit orbit-two"></div>
+</section>
 <main class="login-card">
     <div class="login-brand">
         <div class="login-logo" aria-hidden="true">OYCF</div>
-        <h1><?= e(config()['app_name']) ?></h1>
+        <h1>Welcome to OYAMS</h1>
         <p class="login-sub"><?= e(config()['org_name']) ?></p>
     </div>
 
