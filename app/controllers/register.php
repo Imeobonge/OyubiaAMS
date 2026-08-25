@@ -128,6 +128,7 @@ function submit_group_batch(int $userId): void
     foreach ($people as $i => $person) {
         $data = array_merge($congData, [
             'congregation_id'   => $congregation['id'],
+            'attendee_id'       => $person['attendee_id'] ?? '',
             'full_name'         => trim($person['full_name'] ?? ''),
             'gender'            => $person['gender'] ?? '',
             'phone'             => trim($person['phone'] ?? ''),

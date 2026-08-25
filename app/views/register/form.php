@@ -70,6 +70,8 @@ $oldPeople = isset($old['attendees']) && is_array($old['attendees']) ? array_val
         p=p||{}; var i=counter++; var div=document.createElement('div'); div.className='attendee-row';
         div.innerHTML='<div class="ar-head"><strong class="ar-num"></strong><button type="button" class="btn ghost small ar-rm">Remove</button></div>'+
         '<div class="ar-fields">'+
+        '<input type="hidden" class="ar-attendee-id" name="attendees['+i+'][attendee_id]" value="'+esc(p.attendee_id)+'">'+
+        '<div class="field lookup" style="grid-column:1/-1"><label>Returning attendee? <span class="muted" style="font-weight:400">(optional)</span></label><input type="text" class="ar-returning-search" autocomplete="off" placeholder="Search past records by name or phone to link them…"><div class="lookup-results ar-returning-results" hidden></div><div class="help ar-linked-note" hidden></div></div>'+
         '<div class="field"><label>Full name <span class="req">*</span></label><input type="text" name="attendees['+i+'][full_name]" value="'+esc(p.full_name)+'" required></div>'+
         '<div class="field"><label>Gender <span class="req">*</span></label><select name="attendees['+i+'][gender]" required><option value="">Select…</option><option value="male"'+(p.gender==='male'?' selected':'')+'>Male (Bro.)</option><option value="female"'+(p.gender==='female'?' selected':'')+'>Female (Sis.)</option></select></div>'+
         '<div class="field"><label>Phone</label><input type="tel" name="attendees['+i+'][phone]" value="'+esc(p.phone)+'"></div>'+
@@ -78,10 +80,39 @@ $oldPeople = isset($old['attendees']) && is_array($old['attendees']) ? array_val
         '<div class="field"><label>Birthday — month</label><select name="attendees['+i+'][birth_month]">'+options(p.birth_month)+'</select></div>'+
         '<div class="field"><label>Accommodation</label><select name="attendees['+i+'][accommodation]"><option value="camping"'+(p.accommodation!=='outside'?' selected':'')+'>Camping</option><option value="outside"'+(p.accommodation==='outside'?' selected':'')+'>Outside</option></select></div>'+
         '<div class="field"><label>Accommodation note</label><input type="text" name="attendees['+i+'][accommodation_note]" value="'+esc(p.accommodation_note)+'"></div></div>';
-        rows.appendChild(div); relabel();
+        rows.appendChild(div); attachReturningSearch(div); relabel();
+    }
+    function attachReturningSearch(card) {
+        var input=card.querySelector('.ar-returning-search');
+        var results=card.querySelector('.ar-returning-results');
+        var attendeeId=card.querySelector('.ar-attendee-id');
+        var note=card.querySelector('.ar-linked-note');
+        var timer=null;
+        function field(suffix) { return card.querySelector('[name$="['+suffix+']"]'); }
+        function close() { results.hidden=true; results.innerHTML=''; }
+        function choose(a) {
+            attendeeId.value=a.id;
+            ['full_name','gender','phone','email','birth_day','birth_month'].forEach(function(k){var el=field(k);if(el)el.value=a[k]||'';});
+            var warning=a.in_active?' <span class="muted">· already registered this year</span>':'';
+            note.innerHTML='<span class="linked-pill">Linked to existing record'+(a.years?' · attended '+esc(a.years):'')+warning+' <button type="button" class="ar-unlink" title="Unlink">&times;</button></span>';
+            note.hidden=false; input.value=''; input.style.display='none'; close();
+        }
+        input.addEventListener('input',function(){
+            var q=input.value.trim(); if(timer)clearTimeout(timer);
+            if(q.length<2||!navigator.onLine){close();return;}
+            timer=setTimeout(function(){fetch(<?= json_encode(url('/api/attendees/search?q=')) ?>+encodeURIComponent(q),{headers:{'X-Requested-With':'fetch'},credentials:'same-origin'}).then(function(r){return r.json();}).then(function(d){
+                var found=(d.results||[]).filter(function(a){return Number(a.is_member)===1;});
+                results.innerHTML='';
+                if(!found.length){results.innerHTML='<div class="lookup-empty">No matching past member attendees.</div>';results.hidden=false;return;}
+                found.forEach(function(a){var item=document.createElement('div');item.className='lookup-item';var title=a.gender==='male'?'Bro. ':a.gender==='female'?'Sis. ':'';var meta=[];if(a.phone)meta.push(esc(a.phone));if(a.years)meta.push('attended '+esc(a.years));if(a.in_active)meta.push('⚠ already registered this year');item.innerHTML='<div class="li-name">'+esc(title+a.full_name)+'</div><div class="li-meta">'+meta.join(' · ')+'</div>';item.addEventListener('click',function(){choose(a);});results.appendChild(item);});results.hidden=false;
+            }).catch(close);},250);
+        });
+        card.addEventListener('click',function(e){if(e.target.closest('.ar-unlink')){attendeeId.value='';note.hidden=true;note.innerHTML='';input.style.display='';input.focus();}});
+        document.addEventListener('click',function(e){if(!card.contains(e.target))close();});
+        if(attendeeId.value){note.innerHTML='<span class="linked-pill">Linked to existing record <button type="button" class="ar-unlink" title="Unlink">&times;</button></span>';note.hidden=false;input.style.display='none';}
     }
     rows.addEventListener('click',function(e){var b=e.target.closest('.ar-rm');if(b&&rows.children.length>1){b.closest('.attendee-row').remove();relabel();}});
-    addBtn.addEventListener('click',function(){addRow({}); rows.lastElementChild.querySelector('input').focus();});
+    addBtn.addEventListener('click',function(){addRow({}); rows.lastElementChild.querySelector('.ar-returning-search').focus();});
     (oldPeople.length?oldPeople:[{}]).forEach(addRow);
 })();
 </script>
