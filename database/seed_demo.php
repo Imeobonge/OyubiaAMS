@@ -19,9 +19,9 @@ if (PHP_SAPI !== 'cli' && !defined('OYAMS_AUTHENTICATED_DEMO_SEED')) {
     exit("This seeder is not directly accessible.\n");
 }
 
-require __DIR__ . '/../app/db.php';
-require __DIR__ . '/../app/helpers.php';
-require __DIR__ . '/../app/services/registration.php';
+require_once __DIR__ . '/../app/db.php';
+require_once __DIR__ . '/../app/helpers.php';
+require_once __DIR__ . '/../app/services/registration.php';
 
 $pdo = db();
 
