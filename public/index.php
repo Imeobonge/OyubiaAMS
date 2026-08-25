@@ -52,6 +52,7 @@ $routes = [
     ['GET',  '/admin/editions',              'admin',         'editions'],
     ['POST', '/admin/editions',              'admin',         'store_edition'],
     ['POST', '/admin/editions/{id}/activate','admin',         'activate_edition'],
+    ['POST', '/admin/demo-seed',              'admin',         'seed_demo'],
 
     ['GET',  '/admin/merge',                 'admin',         'merge_form'],
     ['POST', '/admin/merge',                 'admin',         'merge_submit'],

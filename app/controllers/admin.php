@@ -210,3 +210,28 @@ function activate_edition(string $id): void
     flash('Active edition updated.');
     redirect('/admin/editions');
 }
+
+/** Populate an empty public sandbox with the OCYAMS sample dataset. */
+function seed_demo(): void
+{
+    require_admin();
+    verify_csrf();
+
+    if (empty(config()['demo_mode'])) {
+        http_response_code(404);
+        exit('Not found.');
+    }
+
+    try {
+        define('OYAMS_AUTHENTICATED_DEMO_SEED', true);
+        ob_start();
+        require __DIR__ . '/../../database/seed_demo.php';
+        $summary = trim((string)ob_get_clean());
+        flash($summary !== '' ? str_replace("\n", ' ', $summary) : 'Demo data loaded successfully.');
+    } catch (\Throwable $e) {
+        if (ob_get_level() > 0) { ob_end_clean(); }
+        flash($e->getMessage(), 'error');
+    }
+
+    redirect('/');
+}
