@@ -71,10 +71,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Install · OyubiaCYF</title>
+<meta name="theme-color" content="#173b86">
 <link rel="stylesheet" href="<?= url('/assets/css/styles.css') ?>">
-</head><body>
-<div class="auth-wrap" style="max-width:460px">
-  <div class="card">
+</head><body class="form-page">
+<div class="auth-wrap form-wrap" style="max-width:460px">
+  <div class="card form-card">
     <h1>OyubiaCYF Setup</h1>
     <p class="muted">Create the first administrator and this year's edition.</p>
 

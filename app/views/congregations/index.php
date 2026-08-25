@@ -59,7 +59,7 @@
                             <input type="hidden" name="which" value="sisters">
                             <button type="submit"
                                     class="btn small <?= $c['sisters_done'] ? '' : 'ghost' ?>"
-                                    style="<?= $c['sisters_done'] ? 'background:#111;border-color:#111;color:#f5c400' : '' ?>"
+                                    style="<?= $c['sisters_done'] ? 'background:#173b86;border-color:#173b86;color:#fff' : '' ?>"
                                     title="<?= $c['sisters_done'] ? 'Sisters — accommodation given (click to undo)' : 'Mark sisters accommodation as given' ?>">
                                 <?= $c['sisters_done'] ? '✓' : '○' ?> Sis
                             </button>

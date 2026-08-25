@@ -15,7 +15,7 @@ foreach ($fields as $__f) { if ($__f['type'] === 'file_upload') { $hasFileField 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= e($form['title']) ?></title>
-    <meta name="theme-color" content="#f5c400">
+    <meta name="theme-color" content="#173b86">
     <meta name="robots" content="noindex">
     <link rel="stylesheet" href="<?= asset('/assets/css/styles.css') ?>">
 </head>

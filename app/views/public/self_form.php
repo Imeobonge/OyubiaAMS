@@ -11,7 +11,7 @@ $labels = ['group' => 'Came with a congregation', 'solo' => 'Came alone (member)
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Register · <?= e(config()['org_name']) ?></title>
-    <meta name="theme-color" content="#f5c400">
+    <meta name="theme-color" content="#173b86">
     <meta name="robots" content="noindex">
     <link rel="stylesheet" href="<?= asset('/assets/css/styles.css') ?>">
 </head>

@@ -700,3 +700,41 @@ tr:hover td { background: #edf6ff; }
   .login-showcase { display: none; }
   .login-card { padding: 1.8rem 1.35rem; background: #fff; border-radius: 22px; box-shadow: var(--shadow); }
 }
+
+/* Public forms and QR self check-in use the same OYAMS visual system. */
+.form-page {
+  position: relative; min-height: 100vh; overflow-x: hidden;
+  padding: clamp(1.5rem, 4vw, 3.5rem) 1rem 4rem;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(117,186,242,.5), transparent 24rem),
+    radial-gradient(circle at 92% 90%, rgba(49,94,196,.18), transparent 28rem),
+    linear-gradient(145deg, #dceeff 0%, #f7fbff 48%, #edf5fc 100%);
+}
+.form-page::before, .form-page::after {
+  content: ""; position: fixed; z-index: 0; pointer-events: none;
+  width: 86px; height: 86px; border: 5px solid rgba(23,59,134,.18); border-radius: 22px;
+}
+.form-page::before { left: 5vw; top: 9vh; transform: rotate(12deg); }
+.form-page::after { right: 6vw; bottom: 9vh; transform: rotate(-9deg); }
+.form-page .form-wrap { position: relative; z-index: 1; }
+.form-page .form-brand { margin-bottom: 1.25rem; }
+.form-page .login-logo {
+  width: 64px; height: 64px; color: #fff; background: #173b86;
+  border-radius: 17px; box-shadow: 10px 10px 0 -5px #75baf2;
+}
+.form-page .form-brand h1 { color: #173b86; font-weight: 800; }
+.form-page .form-card {
+  border: 1px solid rgba(49,94,196,.13); border-radius: 22px;
+  box-shadow: 0 22px 60px rgba(27,61,119,.13); background: rgba(255,255,255,.97);
+}
+.form-page .form-card > h1 { color: #142b5c; letter-spacing: -.025em; }
+.form-page .form-foot { color: #5f6f8b; font-weight: 600; }
+.form-page .regno { color: #315ec4; }
+.form-done-mark { color: #fff; background: linear-gradient(135deg, #35a86f, #167a4b); }
+.lookup-item:hover, .lookup-item.active, .ss-item:hover, .ss-item.active { background: #edf5ff; }
+
+@media (max-width: 600px) {
+  .form-page { padding: 1.25rem .8rem 3rem; }
+  .form-page::before, .form-page::after { opacity: .45; }
+  .form-page .form-card { padding: 1.25rem 1rem; border-radius: 18px; }
+}
