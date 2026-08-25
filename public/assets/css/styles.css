@@ -1,17 +1,17 @@
 :root {
-  --primary: #0f4c81;
-  --primary-dark: #0b3a63;
-  --accent: #f5a623;
-  --bg: #f4f6f9;
+  --primary: #f5c400;
+  --primary-dark: #d9aa00;
+  --accent: #111111;
+  --bg: #f7f5ed;
   --card: #ffffff;
-  --text: #1f2d3d;
-  --muted: #6b7a90;
-  --border: #e1e7ef;
+  --text: #171717;
+  --muted: #68655c;
+  --border: #e4dfcf;
   --success-bg: #e6f6ec; --success-fg: #1c7a43;
   --error-bg: #fdeaea;   --error-fg: #b3261e;
   --warn-bg: #fff6e5;    --warn-fg: #97631a;
-  --radius: 10px;
-  --shadow: 0 1px 3px rgba(16,38,73,.08), 0 1px 2px rgba(16,38,73,.06);
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(17,17,17,.07), 0 2px 8px rgba(17,17,17,.04);
 }
 
 * { box-sizing: border-box; }
@@ -428,6 +428,87 @@ tbody tr { transition: background .12s ease; }
 .qr-img { width: 300px; height: 300px; max-width: 80vw; image-rendering: pixelated; }
 .qr-poster-cta { font-weight: 700; font-size: 1.15rem; margin-top: .8rem; }
 .qr-poster-url { color: var(--muted); font-size: .9rem; margin-top: .3rem; word-break: break-all; }
+
+/* ================= OyubiaCYF yellow + black identity ================= */
+body {
+  background:
+    radial-gradient(900px 420px at 8% -5%, rgba(245,196,0,.16), transparent 58%),
+    linear-gradient(180deg, #fbfaf6 0%, var(--bg) 100%);
+}
+a { color: #8a6900; font-weight: 550; }
+.topbar {
+  background: #111; color: #fff;
+  padding: .72rem 1.25rem;
+  border-bottom: 4px solid var(--primary);
+  box-shadow: 0 8px 30px rgba(0,0,0,.2);
+}
+.topbar a { color: #fff; }
+.brand a { color: var(--primary); font-weight: 900; letter-spacing: -.02em; }
+.edition-pill { background: var(--primary); color: #111; font-weight: 800; }
+.mainnav a:hover { background: rgba(245,196,0,.16); color: var(--primary); }
+.mainnav a.active { background: var(--primary); color: #111; font-weight: 800; }
+.nav-signout { border-color: rgba(245,196,0,.55); }
+.nav-signout:hover { background: var(--primary); color: #111; }
+.nav-toggle { border-color: rgba(245,196,0,.55); }
+.nav-toggle-bars, .nav-toggle-bars::before, .nav-toggle-bars::after { background: var(--primary); }
+.container { max-width: 1120px; margin-top: 2rem; }
+.page-head h1 { font-size: clamp(1.55rem, 2.5vw, 2.05rem); font-weight: 900; letter-spacing: -.035em; }
+.card {
+  border-color: rgba(17,17,17,.09);
+  box-shadow: var(--shadow);
+  padding: 1.35rem;
+}
+.stat { position: relative; overflow: hidden; text-align: left; }
+.stat::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 5px; background: var(--primary); }
+.stat .num { color: #111; font-size: 2.3rem; font-weight: 900; letter-spacing: -.05em; }
+.stat .lbl { color: #736d5d; font-weight: 750; }
+.btn {
+  background: var(--primary); color: #111;
+  border: 1px solid #d7aa00;
+  border-radius: 10px; font-weight: 800;
+  box-shadow: 0 4px 0 #b68f00;
+}
+.btn:hover { background: #ffda32; color: #111; transform: translateY(-1px); box-shadow: 0 5px 0 #b68f00; }
+.btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #b68f00; }
+.btn.secondary { background: #111; color: var(--primary); border-color: #111; box-shadow: 0 4px 0 #000; }
+.btn.secondary:hover { background: #292929; color: #ffe36b; }
+.btn.ghost { background: #fff; color: #302f2b; border-color: #d8d2bf; box-shadow: none; }
+input[type=text], input[type=email], input[type=tel], input[type=password],
+input[type=number], input[type=date], select, textarea {
+  border: 1.5px solid #d8d2bf; border-radius: 11px;
+  padding: .68rem .78rem; background: #fffefb;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none; border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(245,196,0,.24);
+}
+th { color: #57534a; background: #f5f1e5; font-weight: 800; }
+tr:hover td { background: #fff9db; }
+.badge { border: 1px solid rgba(17,17,17,.1); font-weight: 750; }
+.badge.group { background: #fff1a6; color: #3d3100; }
+.badge.solo { background: #191919; color: #ffe162; }
+.badge.visitor { background: #eee9db; color: #302d26; }
+.section-title, .section-label { color: #29271f; font-weight: 900; border-color: #e0b900; }
+.cat-card { border-color: #ddd5bc; border-radius: 18px; }
+.cat-card:hover { border-color: var(--primary); background: #fffbea; box-shadow: 0 14px 34px rgba(17,17,17,.12); }
+.login-page, .form-page {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(245,196,0,.3), transparent 40%),
+    #111;
+}
+.login-card, .form-card { border: 1px solid rgba(245,196,0,.45); box-shadow: 0 28px 70px rgba(0,0,0,.38); }
+.login-logo {
+  color: #111; background: var(--primary);
+  border-radius: 18px; box-shadow: 8px 8px 0 #111, 8px 8px 0 2px var(--primary);
+}
+.form-foot, .login-page .login-foot { color: #c8c1ad; }
+.attendee-row { background: #fffdf7; border-color: #ded5b8; }
+.qr-poster { border: 3px solid #111; box-shadow: 10px 10px 0 var(--primary); }
+.qr-poster-title { color: #111; font-weight: 900; }
+@media (max-width: 720px) {
+  .topbar.open .mainnav a.active { background: var(--primary); color: #111; }
+  .container { margin-top: 1.25rem; }
+}
 
 @media print {
   /* @page margin:0 removes the browser's automatic URL header/footer line. */

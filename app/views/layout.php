@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= e($title ?? 'OyubiaCYF') ?> · <?= e(config()['app_name']) ?></title>
     <link rel="manifest" href="<?= url('/manifest.webmanifest') ?>">
-    <meta name="theme-color" content="#0f4c81">
+    <meta name="theme-color" content="#f5c400">
     <link rel="stylesheet" href="<?= asset('/assets/css/styles.css') ?>">
 </head>
 <body>

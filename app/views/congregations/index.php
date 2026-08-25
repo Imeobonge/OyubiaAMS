@@ -40,7 +40,7 @@
                 <td><?= e($c['minister_phone'] ?: '—') ?></td>
                 <?php if ($ed): ?>
                 <td style="text-align:center;color:var(--primary);font-weight:600"><?= (int)$c['brothers_count'] ?: '—' ?></td>
-                <td style="text-align:center;color:#c2185b;font-weight:600"><?= (int)$c['sisters_count'] ?: '—' ?></td>
+                <td style="text-align:center;color:#8a6900;font-weight:700"><?= (int)$c['sisters_count'] ?: '—' ?></td>
                 <td style="text-align:center"><?= (int)$c['attendee_count'] ?: '—' ?></td>
                 <td style="text-align:center">
                     <div class="inline-actions" style="justify-content:center;gap:.3rem">
@@ -59,7 +59,7 @@
                             <input type="hidden" name="which" value="sisters">
                             <button type="submit"
                                     class="btn small <?= $c['sisters_done'] ? '' : 'ghost' ?>"
-                                    style="<?= $c['sisters_done'] ? 'background:#c2185b;border-color:#c2185b;color:#fff' : '' ?>"
+                                    style="<?= $c['sisters_done'] ? 'background:#111;border-color:#111;color:#f5c400' : '' ?>"
                                     title="<?= $c['sisters_done'] ? 'Sisters — accommodation given (click to undo)' : 'Mark sisters accommodation as given' ?>">
                                 <?= $c['sisters_done'] ? '✓' : '○' ?> Sis
                             </button>

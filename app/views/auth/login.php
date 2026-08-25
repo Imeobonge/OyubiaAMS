@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sign in · <?= e(config()['app_name']) ?></title>
-    <meta name="theme-color" content="#0f4c81">
+    <meta name="theme-color" content="#f5c400">
     <link rel="stylesheet" href="<?= asset('/assets/css/styles.css') ?>">
 </head>
 <body class="login-page">
